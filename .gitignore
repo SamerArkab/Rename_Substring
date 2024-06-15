@@ -1,0 +1,5 @@
+.venv
+dist
+example_old_test.txt
+README.txt
+test_old.txt
