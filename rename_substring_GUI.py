@@ -9,7 +9,9 @@ def rename_files_in_directory(directory, old_substring, new_substring, remove_nu
         for filename in os.listdir(directory):
             old_file_path = os.path.join(directory, filename)
             if os.path.isfile(old_file_path):
-                new_filename = filename.replace(old_substring, new_substring)
+                new_filename = filename
+                if old_substring:
+                    new_filename = filename.replace(old_substring, new_substring)
                 if remove_numbering:
                     # Remove numbers in various formats
                     new_filename = re.sub(r'^\d+[\-_.]', '', new_filename)  # e.g., 1-, 1_, 1.
@@ -60,7 +62,7 @@ def show_help():
         "1. Select the directory containing the files you want to rename.\n"
         "2. Enter the substring you want to replace in 'Old Substring'.\n"
         "3. Enter the new substring in 'New Substring'.\n"
-        "4. Check 'Remove numbering' if you want to remove any numbering patterns from the filenames.\n"
+        "4. Check 'Remove numbering' if you want to remove any leading numbering patterns from the filenames.\n"
         "5. Click 'Rename Files' to apply the changes.\n\n"
         "Notes:\n"
         "- If 'Remove numbering' is checked, 'Old Substring' can be left empty.\n"

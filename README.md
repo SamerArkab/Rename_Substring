@@ -29,7 +29,7 @@ A simple Python application with a GUI to rename files in a specified directory.
     - Select the directory containing the files you want to rename.
     - Enter the old substring you want to replace.
     - Enter the new substring to replace the old one.
-    - Check the "Remove numbering" checkbox if you want to remove any numbering patterns from the filenames.
+    - Check the "Remove numbering" checkbox if you want to remove any leading numbering patterns from the filenames.
     - Click the "Rename Files" button to perform the renaming operation.
 
 3. Notes:
