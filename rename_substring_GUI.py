@@ -12,9 +12,9 @@ def rename_files_in_directory(directory, old_substring, new_substring, remove_nu
                 new_filename = filename.replace(old_substring, new_substring)
                 if remove_numbering:
                     # Remove numbers in various formats
-                    new_filename = re.sub(r'^\d+[\-_.\s]', '', new_filename)  # e.g., 1-, 1_, 1., 1 (space)
+                    new_filename = re.sub(r'^\d+[\-_.]', '', new_filename)  # e.g., 1-, 1_, 1.
                     new_filename = re.sub(r'\(\d+\)', '', new_filename)        # e.g., (1)
-                    new_filename = re.sub(r'^\d+', '', new_filename)          # e.g., 123filename
+                    # new_filename = re.sub(r'^\d+', '', new_filename)          # e.g., 123filename
                     # new_filename = re.sub(r'\d+$', '', new_filename)          # e.g., filename123
                 if new_filename != filename:  # Check if the filename is actually changing
                     new_file_path = os.path.join(directory, new_filename)
@@ -36,16 +36,37 @@ def on_submit():
     old_substring = old_substring_entry.get().strip()
     new_substring = new_substring_entry.get().strip()
     remove_numbering = remove_numbering_var.get()
-    if not directory or (not old_substring and not remove_numbering) or not new_substring:
-        messagebox.showwarning("Input Error", "All fields must be filled out.")
+
+    if not directory:
+        messagebox.showwarning("Input Error", "Please select a directory.")
         return
+    if remove_numbering and new_substring and not old_substring:
+        messagebox.showwarning("Input Error", "'New substring' field cannot be filled when 'Old substring' is empty.")
+        return
+    if not remove_numbering and not old_substring:
+        messagebox.showwarning("Input Error", "Please enter the old substring if 'Remove numbering' is not checked.")
+        return
+    
     rename_files_in_directory(directory, old_substring, new_substring, remove_numbering)
 
 def clear_fields():
-    directory_entry.delete(0, tk.END)
     old_substring_entry.delete(0, tk.END)
     new_substring_entry.delete(0, tk.END)
     remove_numbering_var.set(False)
+
+def show_help():
+    messagebox.showinfo(
+        "How to Use",
+        "1. Select the directory containing the files you want to rename.\n"
+        "2. Enter the substring you want to replace in 'Old Substring'.\n"
+        "3. Enter the new substring in 'New Substring'.\n"
+        "4. Check 'Remove numbering' if you want to remove any numbering patterns from the filenames.\n"
+        "5. Click 'Rename Files' to apply the changes.\n\n"
+        "Notes:\n"
+        "- If 'Remove numbering' is checked, 'Old Substring' can be left empty.\n"
+        "- If you want to completely remove the 'Old Substring', leave the 'New Substring' field empty.\n"
+        "- Numbering patterns that will be removed include: #-, #_, #., (#), where '#' represents any digit."
+    )
 
 root = tk.Tk()
 root.title("File Renamer")
@@ -74,5 +95,8 @@ remove_numbering_checkbox.grid(row=3, column=0, columnspan=3, pady=10)
 
 submit_button = tk.Button(root, text="Rename Files", command=on_submit)
 submit_button.grid(row=4, column=0, columnspan=3, pady=20)
+
+help_button = tk.Button(root, text="Help", command=show_help)
+help_button.grid(row=4, column=2, pady=20)
 
 root.mainloop()

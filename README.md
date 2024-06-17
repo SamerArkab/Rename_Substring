@@ -6,7 +6,7 @@ A simple Python application with a GUI to rename files in a specified directory.
 
 - Select a directory to rename files.
 - Replace specified substrings in filenames.
-- Option to remove numbering from filenames (supports various formats like `1_`, `1-`, `1.`, `(1)`, etc.).
+- Option to remove numbering from filenames (supports various formats: `1_`, `1-`, `1.`, `(1)`).
 - Simple and user-friendly GUI built with Tkinter.
 
 ## Installation
@@ -26,11 +26,16 @@ A simple Python application with a GUI to rename files in a specified directory.
     ```
 
 2. Use the GUI to:
-    - Browse and select the directory containing the files you want to rename.
+    - Select the directory containing the files you want to rename.
     - Enter the old substring you want to replace.
     - Enter the new substring to replace the old one.
-    - Check the "Remove numbering" checkbox if you want to remove numbers from filenames.
+    - Check the "Remove numbering" checkbox if you want to remove any numbering patterns from the filenames.
     - Click the "Rename Files" button to perform the renaming operation.
+
+3. Notes:
+    - If 'Remove numbering' is checked, 'Old Substring' can be left empty.
+    - If you want to completely remove the 'Old Substring', leave the 'New Substring' field empty.
+    - Numbering patterns that will be removed include: #-, #_, #., (#), where '#' represents any digit.
 
 ## Building an Executable
 
