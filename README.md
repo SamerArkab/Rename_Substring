@@ -1,12 +1,12 @@
 # File Renamer
 
-A simple Python application with a GUI to rename files in a specified directory. It allows you to replace a specific substring in filenames with another substring and optionally remove numbering from filenames.
+A simple Python application with a GUI to rename files in a specified directory. It allows you to replace a specific substring in filenames with another substring and optionally remove leading numbering patterns from filenames.
 
 ## Features
 
 - Select a directory to rename files.
 - Replace specified substrings in filenames.
-- Option to remove numbering from filenames (supports various formats: `1_`, `1-`, `1.`, `(1)`).
+- Option to remove leading numbering patterns from filenames (supports the following formats: `1_`, `1-`, `1.`, `(1)`).
 - Simple and user-friendly GUI built with Tkinter.
 
 ## Installation
